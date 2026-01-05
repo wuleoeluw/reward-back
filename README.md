@@ -1,6 +1,17 @@
-# Monorepo Template
+# Reward Back - Credit Card Manager
 
-A modern, scalable monorepo template built with [Next.js](https://nextjs.org/), [React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/), and [Turborepo](https://turbo.build/). This template provides a solid foundation for building multiple applications and shared packages with a unified development experience.
+A modern credit card management web app built with [Next.js](https://nextjs.org/), [React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/), and deployed on [GitHub Pages](https://pages.github.com/). Browse, filter, and track your reward credit cards with real-time quota calculations.
+
+## Features
+
+- 🎴 **Credit Card Display** - Browse all your reward credit cards from JSON data
+- 🔍 **Text Filter** - Search cards by name or bank issuer in real-time
+- 📊 **Quota Calculator** - Calculate remaining credit quota with mathematical expressions (e.g., `1000-50-30`)
+- 💾 **Local Storage** - Persist quota calculations across sessions
+- 🌙 **Dark Theme** - Beautiful dark mode interface with Tailwind CSS
+- 📱 **Fully Responsive** - Works seamlessly on mobile, tablet, and desktop
+- 🚀 **GitHub Pages Ready** - Automated deployment with GitHub Actions
+- 📈 **Component Architecture** - Clean, reusable component structure with server/client separation
 
 ## Features
 
@@ -21,94 +32,178 @@ A modern, scalable monorepo template built with [Next.js](https://nextjs.org/), 
 - Node.js 20.x or higher
 - pnpm 10.x or higher
 
-### Installation
+### Installation & Development
 
 ```bash
 # Install dependencies
 pnpm install
 
-# Start development server
-pnpm dev
+# Start development server (with Turbopack)
+pnpm --filter=web dev
 
-# Build all packages
-pnpm build
-
-# Run linting with auto-fix
-pnpm lint
-
-# Format code with Prettier
-pnpm format
-
-# Run tests
-pnpm test
-
-# Clean build artifacts
-pnpm clean
+# Navigate to http://localhost:3000
 ```
+
+### Building & Deployment
+
+```bash
+# Build for production
+pnpm --filter=web build
+
+# Lint code
+pnpm --filter=web lint
+
+# Format code
+pnpm format
+```
+
+## Live Demo
+
+The web app is deployed on GitHub Pages and accessible at:
+👉 [https://wuleoeluw.github.io/reward-back](https://wuleoeluw.github.io/reward-back)
+
+## Card Data Structure
+
+Credit cards are defined in JSON files under `apps/web/public/_frontmatter/`:
+
+```json
+{
+  "title": "現金回饋Green卡",
+  "image": "https://bank.sinopac.com/upload/sinopac/picture/197bef0f510000003aea.png",
+  "issuer": "永豐銀行",
+  "dueDate": "2026/6/30",
+  "upperLimit": 7500,
+  "rate": 5,
+  "href": "https://bank.sinopac.com/sinopacBT/personal/credit-card/introduction/bankcard/cashcard.html"
+}
+```
+
+### Adding New Cards
+
+1. Create a new directory under `apps/web/public/_frontmatter/{cardId}/`
+2. Add a `frontmatter.json` file with the card details above
+3. The build script will automatically generate and include it
+
+## How It Works
+
+### Data Flow
+
+1. **Build Time**: `prebuild` script generates JSON files from frontmatter data
+2. **Runtime**: App fetches `cards-manifest.json` and loads individual card JSONs
+3. **Client-Side**: React manages filtering, search, and quota calculations
+4. **Storage**: Quota data persists in browser localStorage
 
 ## Project Structure
 
 ```
 .
-├── apps/                      # Applications
-│   └── web/                   # Next.js web application
-├── packages/                  # Shared packages
-│   ├── config-eslint/         # Shared ESLint configuration
-│   ├── config-prettier/       # Shared Prettier configuration
-│   └── config-tsconfig/       # Shared TypeScript configuration
-├── turbo.json                 # Turborepo configuration
-├── pnpm-workspace.yaml        # pnpm workspace configuration
-└── package.json               # Root package configuration
+├── apps/
+│   └── web/                           # Next.js credit card app
+│       ├── public/
+│       │   ├── _frontmatter/          # Card data source
+│       │   │   └── {cardId}/
+│       │   │       └── frontmatter.json
+│       │   ├── cards/                 # Generated card JSON files
+│       │   └── cards-manifest.json    # Generated manifest
+│       ├── src/
+│       │   ├── app/                   # Next.js app directory
+│       │   │   ├── page.tsx           # Main page (client component)
+│       │   │   ├── layout.tsx         # Root layout
+│       │   │   └── globals.css        # Global styles
+│       │   ├── components/            # Reusable components
+│       │   │   ├── CardItem.tsx       # Individual card component
+│       │   │   ├── CardGrid.tsx       # Cards grid layout
+│       │   │   ├── SearchBar.tsx      # Search input
+│       │   │   ├── PageHeader.tsx     # Page header
+│       │   │   ├── LoadingSpinner.tsx # Loading state
+│       │   │   └── EmptyState.tsx     # No results state
+│       │   └── utilities/             # Helper functions
+│       │       ├── quotaCalculator.ts # Quota calculation logic
+│       │       └── cardLoader.ts      # Card data loading
+│       ├── scripts/
+│       │   └── generate-cards.ts      # Build script for JSON generation
+│       ├── next.config.ts             # Next.js configuration
+│       └── package.json
+├── .github/
+│   └── workflows/
+│       └── deploy.yml                 # GitHub Actions CI/CD pipeline
+└── package.json
 ```
 
-## Development
+## Features in Detail
 
-### Adding a New App
+### Quota Calculator
 
-1. Create a new directory under `apps/`
-2. Initialize with `package.json` and appropriate configuration files
-3. Reference shared configs from `packages/`
+Users can enter cost expressions using standard math operators:
 
-### Adding a Shared Package
+- Single numbers: `500`
+- Addition: `100+50+75`
+- Complex expressions: `1000-100*2/3`
 
-1. Create a new directory under `packages/`
-2. Create `package.json` with scoped name (e.g., `@monorepo/package-name`)
-3. Add dependencies in root `package.json` using workspace protocol
+Formula: `Remaining Quota = Upper Limit - Cost`
 
-### Workspace Dependencies
+### Dark Theme
 
-Packages can reference each other using the `workspace:*` protocol in `package.json`:
+- Slate-900 to slate-800 gradient background
+- Slate-800 card panels with proper contrast
+- Blue accent colors for interactive elements
+- Smooth transitions and hover effects
 
-```json
-{
-  "dependencies": {
-    "@monorepo/config-eslint": "workspace:*"
-  }
-}
-```
+### Mobile Responsive
 
-## Scripts
-
-- `pnpm dev` - Start development servers (using Turbopack)
-- `pnpm build` - Build all apps and packages
-- `pnpm lint` - Run ESLint with auto-fix
-- `pnpm format` - Format code with Prettier
-- `pnpm test` - Run tests with Vitest
-- `pnpm clean` - Clean all build artifacts
+- 1-column layout on phones
+- 2-column layout on tablets
+- 3-column layout on desktop
+- Touch-friendly buttons and inputs
 
 ## Technology Stack
 
-| Tool           | Purpose             |
-| -------------- | ------------------- |
-| Next.js 16     | React framework     |
-| React 19       | UI library          |
-| TypeScript     | Type safety         |
-| Tailwind CSS 4 | Styling             |
-| pnpm           | Package manager     |
-| Turborepo      | Build orchestration |
-| ESLint         | Code linting        |
-| Prettier       | Code formatting     |
-| Vitest         | Unit testing        |
+| Tool           | Purpose                     |
+| -------------- | --------------------------- |
+| Next.js 16     | React framework with SSR    |
+| React 19       | UI library                  |
+| TypeScript     | Type safety                 |
+| Tailwind CSS 4 | Styling & responsive design |
+| pnpm           | Package manager             |
+| GitHub Actions | CI/CD pipeline              |
+| GitHub Pages   | Static hosting              |
+| ESLint         | Code linting                |
+| Prettier       | Code formatting             |
+
+## Deployment
+
+### Automated Deployment
+
+The app automatically deploys to GitHub Pages on every push to `main` branch via GitHub Actions:
+
+1. **Build Stage**: Generates static files with Next.js
+2. **Pre-build Script**: Converts frontmatter JSON to public card files
+3. **Deploy Stage**: Uploads artifacts to GitHub Pages
+
+### Manual Deployment
+
+```bash
+# Build locally
+pnpm --filter=web build
+
+# Output is in apps/web/out/
+# Upload to your hosting service
+```
+
+### GitHub Pages Configuration
+
+To enable deployment:
+
+1. Go to repository settings → Pages
+2. Select "GitHub Actions" as build source
+3. The workflow will deploy automatically
+
+## Contributing
+
+1. Create a feature branch: `git checkout -b feat/feature-name`
+2. Make changes and commit: `git commit -m "feat: description"`
+3. Push to branch: `git push origin feat/feature-name`
+4. Open a Pull Request
 
 ## License
 
