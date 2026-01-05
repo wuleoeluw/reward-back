@@ -3,10 +3,10 @@ name: Deploy Web App to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - '**'
   pull_request:
     branches:
-      - main
+      - '**'
 
 permissions:
   contents: read
