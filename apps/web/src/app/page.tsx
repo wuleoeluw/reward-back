@@ -14,6 +14,8 @@ interface CreditCard {
   issuer: string;
   dueDate: string;
   upperLimit: number;
+  rate: number;
+  href: string;
   id: string;
 }
 

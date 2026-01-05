@@ -6,6 +6,8 @@ interface CreditCard {
   issuer: string;
   dueDate: string;
   upperLimit: number;
+  rate: number;
+  href: string;
   id: string;
 }
 
@@ -42,6 +44,10 @@ export function CardItem({
           <div className="flex items-center justify-between text-sm">
             <span className="text-slate-400">Issuer:</span>
             <span className="font-medium text-slate-200">{card.issuer}</span>
+          </div>
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-slate-400">Rate:</span>
+            <span className="font-medium text-slate-200">{card.rate}%</span>
           </div>
           <div className="flex items-center justify-between text-sm">
             <span className="text-slate-400">Expires:</span>
@@ -87,15 +93,25 @@ export function CardItem({
           </div>
         )}
 
-        {/* Reset Button */}
-        {quota && (
-          <button
-            onClick={onResetQuota}
-            className="w-full rounded-lg bg-slate-700 px-3 py-2 text-sm font-semibold text-slate-200 transition hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500"
+        {/* Action Buttons */}
+        <div className="space-y-2">
+          <a
+            href={card.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full rounded-lg bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            Reset Quota
-          </button>
-        )}
+            Learn More
+          </a>
+          {quota && (
+            <button
+              onClick={onResetQuota}
+              className="w-full rounded-lg bg-slate-700 px-3 py-2 text-sm font-semibold text-slate-200 transition hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-500"
+            >
+              Reset Quota
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
