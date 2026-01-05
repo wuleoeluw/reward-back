@@ -1,0 +1,38 @@
+{
+  "name": "@monorepo/root",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "clean": "turbo run clean",
+    "format": "prettier --write .",
+    "lint": "turbo run lint -- --fix",
+    "prepare": "husky",
+    "test": "turbo run test"
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --write --ignore-unknown"
+    ]
+  },
+  "prettier": "@monorepo/config-prettier",
+  "devDependencies": {
+    "@monorepo/config-eslint": "workspace:*",
+    "@monorepo/config-prettier": "workspace:*",
+    "@monorepo/config-tsconfig": "workspace:*",
+    "@types/node": "^25",
+    "eslint": "^9",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.4",
+    "prettier-plugin-packagejson": "^2.5.20",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "turbo": "^2.4.4",
+    "typescript": "^5",
+    "vitest": "^2.1.9"
+  },
+  "packageManager": "pnpm@10.6.4",
+  "engines": {
+    "node": "^24"
+  }
+}

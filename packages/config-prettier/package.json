@@ -1,0 +1,9 @@
+{
+  "name": "@monorepo/config-prettier",
+  "private": true,
+  "main": "./index.cjs",
+  "dependencies": {
+    "prettier-plugin-packagejson": "^2.5.20",
+    "prettier-plugin-tailwindcss": "^0.7.2"
+  }
+}

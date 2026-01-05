@@ -1,0 +1,35 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      eslint:
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "husky"
+          - "lint-staged"
+          - "eslint"
+          - "globals"
+          - "@eslint/*"
+          - "*eslint*"
+        exclude-patterns:
+          - "eslint-config-next"
+      prettier:
+        patterns:
+          - "prettier"
+          - "prettier-plugin-*"
+      interchain-kit:
+        patterns:
+          - "@interchain-kit/*"
+      interchainjs:
+        patterns:
+          - "@interchainjs/*"
+          - "interchainjs"
