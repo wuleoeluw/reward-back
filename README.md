@@ -135,6 +135,7 @@ Credit cards are defined in JSON files under `apps/web/public/_frontmatter/`:
 ### Quota Calculator
 
 Users can enter cost expressions using standard math operators:
+
 - Single numbers: `500`
 - Addition: `100+50+75`
 - Complex expressions: `1000-100*2/3`
@@ -157,17 +158,17 @@ Formula: `Remaining Quota = Upper Limit - Cost`
 
 ## Technology Stack
 
-| Tool           | Purpose                      |
-| -------------- | ---------------------------- |
-| Next.js 16     | React framework with SSR     |
-| React 19       | UI library                   |
-| TypeScript     | Type safety                  |
-| Tailwind CSS 4 | Styling & responsive design  |
-| pnpm           | Package manager              |
-| GitHub Actions | CI/CD pipeline               |
-| GitHub Pages   | Static hosting               |
-| ESLint         | Code linting                 |
-| Prettier       | Code formatting              |
+| Tool           | Purpose                     |
+| -------------- | --------------------------- |
+| Next.js 16     | React framework with SSR    |
+| React 19       | UI library                  |
+| TypeScript     | Type safety                 |
+| Tailwind CSS 4 | Styling & responsive design |
+| pnpm           | Package manager             |
+| GitHub Actions | CI/CD pipeline              |
+| GitHub Pages   | Static hosting              |
+| ESLint         | Code linting                |
+| Prettier       | Code formatting             |
 
 ## Deployment
 
@@ -192,6 +193,7 @@ pnpm --filter=web build
 ### GitHub Pages Configuration
 
 To enable deployment:
+
 1. Go to repository settings → Pages
 2. Select "GitHub Actions" as build source
 3. The workflow will deploy automatically
