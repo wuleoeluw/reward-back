@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "prebuild": "tsx scripts/generate-cards.ts",
     "build": "next build",
     "dev": "next dev --turbopack",
     "lint": "eslint .",
@@ -24,6 +25,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.0.7",
     "tailwindcss": "^4",
+    "tsx": "^4",
     "typescript": "^5"
   }
 }
