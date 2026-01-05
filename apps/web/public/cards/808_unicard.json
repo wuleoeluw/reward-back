@@ -1,0 +1,9 @@
+{
+  "title": "Unicard",
+  "image": "https://www.esunbank.com/zh-tw/-/media/New-ESUNBANK/Credit-Card/Card-Intro/bank-card/Unicard/460x288_vw_.webp",
+  "issuer": "玉山銀行",
+  "dueDate": "2026/6/30",
+  "upperLimit": 40000,
+  "rate": 3.5,
+  "href": "https://www.esunbank.com/zh-tw/personal/credit-card/intro/bank-card/unicard"
+}

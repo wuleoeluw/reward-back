@@ -33,13 +33,28 @@ export default function Home() {
   const [quotas, setQuotas] = useState<CardQuota>({});
   const [inputValues, setInputValues] = useState<{ [cardId: string]: string }>({});
 
-  // Load cards from frontmatter
+  // Load cards from public JSON files
   useEffect(() => {
     async function loadCards() {
       try {
-        const response = await fetch("/api/cards");
-        const data = await response.json();
-        setCards(data);
+        // Get list of card directories from manifest
+        const response = await fetch("/cards-manifest.json");
+        const manifest = await response.json();
+
+        // Load each card's JSON
+        const cardsData: CreditCard[] = [];
+        for (const cardId of manifest.cardIds) {
+          const cardResponse = await fetch(`/cards/${cardId}.json`);
+          const cardData = await cardResponse.json();
+          cardsData.push({
+            ...cardData,
+            id: cardId,
+          });
+        }
+
+        // Sort cards by title
+        cardsData.sort((a, b) => a.title.localeCompare(b.title));
+        setCards(cardsData);
       } catch (error) {
         console.error("Failed to load cards:", error);
       } finally {

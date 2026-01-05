@@ -1,17 +1,18 @@
-import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-interface CreditCard {
+export interface CreditCard {
   title: string;
   image: string;
   issuer: string;
   dueDate: string;
   upperLimit: number;
+  rate: number;
+  href: string;
   id: string;
 }
 
-export async function GET() {
+export async function loadCards(): Promise<CreditCard[]> {
   try {
     const frontmatterPath = path.join(process.cwd(), "public/_frontmatter");
 
@@ -36,9 +37,9 @@ export async function GET() {
     // Sort cards by title
     cards.sort((a, b) => a.title.localeCompare(b.title));
 
-    return NextResponse.json(cards);
+    return cards;
   } catch (error) {
     console.error("Error loading cards:", error);
-    return NextResponse.json({ error: "Failed to load cards" }, { status: 500 });
+    return [];
   }
 }
