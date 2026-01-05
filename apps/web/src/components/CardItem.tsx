@@ -29,11 +29,11 @@ export function CardItem({ card, inputValue, quota, onCostChange, onResetQuota }
           href={card.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute bottom-2 right-2 flex items-center justify-center rounded-lg bg-slate-700 p-2 text-slate-200 shadow-lg transition hover:bg-slate-600 focus:ring-2 focus:ring-slate-500 focus:outline-none"
+          className="absolute right-2 bottom-2 flex items-center justify-center rounded-lg bg-slate-700 p-2 text-slate-200 shadow-lg transition hover:bg-slate-600 focus:ring-2 focus:ring-slate-500 focus:outline-none"
           title="View card details"
         >
           <svg
-            className="w-5 h-5"
+            className="h-5 w-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -106,16 +106,15 @@ export function CardItem({ card, inputValue, quota, onCostChange, onResetQuota }
         )}
 
         {/* Action Buttons */}
-        
-          {quota && (
-            <button
-              onClick={onResetQuota}
-              className="w-full rounded-lg bg-slate-700 px-3 py-2 text-sm font-semibold text-slate-200 transition hover:bg-slate-600 focus:ring-2 focus:ring-slate-500 focus:outline-none"
-            >
-              Reset Quota
-            </button>
-          )}
-        
+
+        {quota && (
+          <button
+            onClick={onResetQuota}
+            className="w-full rounded-lg bg-slate-700 px-3 py-2 text-sm font-semibold text-slate-200 transition hover:bg-slate-600 focus:ring-2 focus:ring-slate-500 focus:outline-none"
+          >
+            Reset Quota
+          </button>
+        )}
       </div>
     </div>
   );
