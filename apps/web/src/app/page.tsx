@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import { SearchBar } from "./components/SearchBar";
-import { CardGrid } from "./components/CardGrid";
-import { LoadingSpinner } from "./components/LoadingSpinner";
-import { EmptyState } from "./components/EmptyState";
-import { PageHeader } from "./components/PageHeader";
-import { calculateQuota } from "./utilities/quotaCalculator";
+import { SearchBar } from "../components/SearchBar";
+import { CardGrid } from "../components/CardGrid";
+import { LoadingSpinner } from "../components/LoadingSpinner";
+import { EmptyState } from "../components/EmptyState";
+import { PageHeader } from "../components/PageHeader";
+import { calculateQuota } from "../utilities/quotaCalculator";
 
 interface CreditCard {
   title: string;
