@@ -1,7 +1,4 @@
-export function calculateQuota(
-  costExpression: string,
-  upperLimit: number,
-): number | null {
+export function calculateQuota(costExpression: string, upperLimit: number): number | null {
   try {
     // Replace spaces and validate expression
     const expr = costExpression.trim().replace(/\s+/g, "");

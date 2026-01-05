@@ -103,9 +103,7 @@ export default function Home() {
   const filteredCards = useMemo(() => {
     const lowerFilter = searchFilter.toLowerCase();
     return cards.filter(
-      (card) =>
-        card.title.toLowerCase().includes(lowerFilter) ||
-        card.issuer.toLowerCase().includes(lowerFilter),
+      (card) => card.title.toLowerCase().includes(lowerFilter) || card.issuer.toLowerCase().includes(lowerFilter),
     );
   }, [cards, searchFilter]);
 
