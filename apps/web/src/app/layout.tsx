@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Baby LST",
-  description: "Baby LST",
+  title: "Reward back - Credit Cards",
+  description: "Browse and filter your reward credit cards",
 };
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased`}>{children}</body>
+      <body className={`${inter.variable} bg-slate-900 text-slate-100`}>{children}</body>
     </html>
   );
 }
