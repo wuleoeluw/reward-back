@@ -38,13 +38,14 @@ export default function Home() {
     async function loadCards() {
       try {
         // Get list of card directories from manifest
-        const response = await fetch("/cards-manifest.json");
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+        const response = await fetch(`${basePath}/cards-manifest.json`);
         const manifest = await response.json();
 
         // Load each card's JSON
         const cardsData: CreditCard[] = [];
         for (const cardId of manifest.cardIds) {
-          const cardResponse = await fetch(`/cards/${cardId}.json`);
+          const cardResponse = await fetch(`${basePath}/cards/${cardId}.json`);
           const cardData = await cardResponse.json();
           cardsData.push({
             ...cardData,
