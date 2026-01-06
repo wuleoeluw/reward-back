@@ -23,8 +23,30 @@ export function CardItem({ card, inputValue, quota, onCostChange, onResetQuota }
   return (
     <div className="transform overflow-hidden rounded-xl bg-slate-800 shadow-lg transition-shadow transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
       {/* Card Image */}
-      <div className="h-40 overflow-hidden bg-slate-700 sm:h-48">
+      <div className="relative h-40 overflow-hidden bg-slate-700 sm:h-48">
         <img src={card.image} alt={card.title} className="h-full w-full object-cover" />
+        <a
+          href={card.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute right-2 bottom-2 flex items-center justify-center rounded-lg bg-slate-700 p-2 text-slate-200 shadow-lg transition hover:bg-slate-600 focus:ring-2 focus:ring-slate-500 focus:outline-none"
+          title="View card details"
+        >
+          <svg
+            className="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+            />
+          </svg>
+        </a>
       </div>
 
       {/* Card Content */}
@@ -84,24 +106,15 @@ export function CardItem({ card, inputValue, quota, onCostChange, onResetQuota }
         )}
 
         {/* Action Buttons */}
-        <div className="space-y-2">
-          <a
-            href={card.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block w-full rounded-lg bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white transition hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+
+        {quota && (
+          <button
+            onClick={onResetQuota}
+            className="w-full rounded-lg bg-slate-700 px-3 py-2 text-sm font-semibold text-slate-200 transition hover:bg-slate-600 focus:ring-2 focus:ring-slate-500 focus:outline-none"
           >
-            Learn More
-          </a>
-          {quota && (
-            <button
-              onClick={onResetQuota}
-              className="w-full rounded-lg bg-slate-700 px-3 py-2 text-sm font-semibold text-slate-200 transition hover:bg-slate-600 focus:ring-2 focus:ring-slate-500 focus:outline-none"
-            >
-              Reset Quota
-            </button>
-          )}
-        </div>
+            Reset Quota
+          </button>
+        )}
       </div>
     </div>
   );
