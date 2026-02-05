@@ -12,7 +12,7 @@
   "prettier": "@monorepo/config-prettier",
   "dependencies": {
     "bignumber.js": "^9.3.1",
-    "next": "16.0.7",
+    "next": "16.1.3",
     "react": "^19.2.1",
     "react-dom": "^19.2.3"
   },
