@@ -30,7 +30,14 @@ export default function Home() {
   const [searchFilter, setSearchFilter] = useState("");
   const [cards, setCards] = useState<CreditCard[]>([]);
   const [loading, setLoading] = useState(true);
-  const [quotas, setQuotas] = useState<CardQuota>({});
+  const [quotas, setQuotas] = useState<CardQuota>(() => {
+    try {
+      const savedQuotas = localStorage.getItem("cardQuotas");
+      return savedQuotas ? (JSON.parse(savedQuotas) as CardQuota) : {};
+    } catch {
+      return {};
+    }
+  });
   const [inputValues, setInputValues] = useState<{ [cardId: string]: string }>({});
 
   // Load cards from public JSON files
@@ -64,18 +71,6 @@ export default function Home() {
     }
 
     loadCards();
-  }, []);
-
-  // Load quotas from local storage
-  useEffect(() => {
-    const savedQuotas = localStorage.getItem("cardQuotas");
-    if (savedQuotas) {
-      try {
-        setQuotas(JSON.parse(savedQuotas));
-      } catch (error) {
-        console.error("Failed to load quotas from local storage:", error);
-      }
-    }
   }, []);
 
   // Handle cost input change
